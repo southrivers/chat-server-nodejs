@@ -23,8 +23,14 @@ io.on('connection', (socket) => {
         console.log(`disconnect from ${socket.id}`)
     });
     socket.on('message', (data) => {
-        console.log(`receive data from client ${data}`);
-        socket.broadcast.emit('message', data);
+        try {
+            console.log(`receive data from client ${JSON.stringify(data)}`);
+            socket.broadcast.emit('message-receive', data);
+        } catch(e) {
+            console.log("fail")
+            console.log(e);
+        }
+        
     })
 })
 
