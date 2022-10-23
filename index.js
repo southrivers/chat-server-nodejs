@@ -18,7 +18,14 @@ const ScoketServer = require('socket.io')
 const io = ScoketServer(server)
 // 这里用于收发消息
 io.on('connection', (socket) => {
-    console.log(socket.id)
+    console.log(`connect from ${socket.id}`)
+    socket.on('disconnect', () => {
+        console.log(`disconnect from ${socket.id}`)
+    });
+    socket.on('message', (data) => {
+        console.log(`receive data from client ${data}`);
+        socket.broadcast.emit('message', data);
+    })
 })
 
 
