@@ -18,7 +18,7 @@ const ScoketServer = require('socket.io')
 const io = ScoketServer(server)
 // 这里用于收发消息
 io.on('connection', (socket) => {
-    console.log(socket)
+    console.log(socket.id)
 })
 
 
